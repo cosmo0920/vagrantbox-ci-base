@@ -21,7 +21,7 @@ script:
     mkdir -p $HOME/packer
     cd $HOME/packer
     wget https://dl.bintray.com/mitchellh/packer/${PACKER_VERSION}_linux_amd64.zip
-    unzip ${PACKER_VERSION}_linux_amd64.zip
-    rm ${PACKER_VERSION}_linux_amd64.zip
+    unzip "${PACKER_VERSION}_linux_amd64.zip"
+    rm "${PACKER_VERSION}_linux_amd64.zip"
     export PATH="$HOME/packer:$PATH"
     packer version | tee $WERCKER_REPORT_MESSAGE_FILE
