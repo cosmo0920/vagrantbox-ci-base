@@ -1,0 +1,15 @@
+name: vagrantbox-ci-base
+version: 0.0.2
+inherits: wercker/ruby@1.0.0
+type: main
+platform: ubuntu@12.04
+description: wercker box for packer template build
+keywords:
+  - packer
+  - vagrant
+script: |
+  wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
+  sudo dpkg -i vagrant_1.6.3_x86_64.deb
+  wget http://dl.bintray.com/mitchellh/packer/0.6.0_linux_amd64.zip
+  unzip 0.6.0_linux_amd64.zip
+  ./packer version | tee $WERCKER_REPORT_MESSAGE_FILE
