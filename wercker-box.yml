@@ -7,21 +7,19 @@ description: wercker box for packer template build
 keywords:
   - packer
   - vagrant
-script:
-  name: Install packer and Vagrant
-  code: |-
-    sudo apt-get update -y -qq
-    sudo apt-get install unzip -y -qq
+script: |
+  sudo apt-get update -y -qq
+  sudo apt-get install unzip -y -qq
 
-    export VAGRANT_VERSION=1.6.3
-    export PACKER_VERSION=0.6.0
+  export VAGRANT_VERSION=1.6.3
+  export PACKER_VERSION=0.6.0
 
-    wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VERSION}_x86_64.deb
-    sudo dpkg -i vagrant_${VAGRANT_VERSION}_x86_64.deb
-    mkdir -p $HOME/packer
-    cd $HOME/packer
-    wget https://dl.bintray.com/mitchellh/packer/${PACKER_VERSION}_linux_amd64.zip
-    unzip "${PACKER_VERSION}_linux_amd64.zip"
-    rm "${PACKER_VERSION}_linux_amd64.zip"
-    export PATH="$HOME/packer:$PATH"
-    packer version | tee $WERCKER_REPORT_MESSAGE_FILE
+  wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VERSION}_x86_64.deb
+  sudo dpkg -i vagrant_${VAGRANT_VERSION}_x86_64.deb
+  mkdir -p $HOME/packer
+  cd $HOME/packer
+  wget https://dl.bintray.com/mitchellh/packer/${PACKER_VERSION}_linux_amd64.zip
+  unzip "${PACKER_VERSION}_linux_amd64.zip"
+  rm "${PACKER_VERSION}_linux_amd64.zip"
+  export PATH="$HOME/packer:$PATH"
+  packer version | tee $WERCKER_REPORT_MESSAGE_FILE
