@@ -10,8 +10,15 @@ keywords:
 install-packages:
   packages: unzip
 script: |
-  wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
-  sudo dpkg -i vagrant_1.6.3_x86_64.deb
-  wget http://dl.bintray.com/mitchellh/packer/0.6.0_linux_amd64.zip
-  unzip 0.6.0_linux_amd64.zip
-  ./packer version | tee $WERCKER_REPORT_MESSAGE_FILE
+  export VAGRANT_VERSION=1.6.3
+  export PACKER_VERSION=0.6.0
+
+  wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VERSION}_x86_64.deb
+  sudo dpkg -i vagrant_${VAGRANT_VERSION}_x86_64.deb
+  mkdir -p $HOME/packer
+  cd $HOME/packer
+  wget https://dl.bintray.com/mitchellh/packer/${PACKER_VERSION}_linux_amd64.zip
+  unzip ${PACKER_VERSION}_linux_amd64.zip
+  rm ${PACKER_VERSION}_linux_amd64.zip
+  export PATH="$HOME/packer:$PATH"
+  packer version | tee $WERCKER_REPORT_MESSAGE_FILE
