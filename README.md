@@ -1,2 +1,2 @@
-wercker box for Vagrant box CI base
+wercker base box for CI with VagrantBox
 ===
